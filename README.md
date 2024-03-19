@@ -1,35 +1,32 @@
-# MyShell
-# Command Shell
+## MyShell (Custom Shell)
 
-This is a simple command shell implemented in C that runs on Linux systems. It allows users to interactively execute built-in Linux commands along with some additional features. The shell runs an infinite loop, processing user commands until the 'exit' command is entered.
+### Introduction
+MyShell is a custom shell implementation written in C. It provides a user-friendly interface to execute various shell commands with additional features such as sequential and parallel execution, output redirection, command piping, and signal handling.
 
-## Features
+### Key Features
+- **Basic Shell Commands:** Execute common shell commands like ls, cd, mkdir, etc.
+- **Sequential Execution:** Run multiple commands sequentially using the `##` delimiter.
+- **Parallel Execution:** Execute multiple commands in parallel using the `&&` delimiter.
+- **Output Redirection:** Redirect the output of a command to a specified file using `>`.
+- **Command Piping:** Execute a pipeline of commands using the `|` operator for complex operations.
+- **Signal Handling:** Handle Ctrl+C (SIGINT) and Ctrl+Z (SIGTSTP) signals gracefully.
 
-1. **Basic Functionality**: The shell provides a prompt indicating the current working directory, allowing users to enter commands interactively. It utilizes `getline()` and `strsep()` functions for input processing and command parsing.
+### Code Overview
+Here's a brief overview of the core functionalities in MyShell:
 
-2. **Changing Directory**: Supports the `cd` command to change the working directory. Users can use `cd <directoryPath>` to change to a specific directory and `cd ..` to move to the parent directory.
+- **parseInput:** Parses user input to identify commands, arguments, and delimiters.
+- **executeCommand:** Executes a single command with proper signal handling and error checking.
+- **executeParallelCommands:** Runs multiple commands in parallel, waiting for all processes to finish.
+- **executeSequentialCommands:** Executes multiple commands sequentially, ensuring proper order of execution.
+- **executeCommandRedirection:** Redirects the output of a single command to a specified file.
+- **executePipedCommands:** Handles command pipelines, allowing the output of one command to be used as input for another.
+- **Signal Handlers:** Custom signal handlers for Ctrl+C (SIGINT) and Ctrl+Z (SIGTSTP) signals.
 
-3. **Incorrect Command Handling**: Displays an error message ('Shell: Incorrect command') when the shell encounters an unknown command format. Additionally, it displays any error messages generated during command execution.
+### How to Use
+1. **Compilation:** Compile the source code using a C compiler (e.g., gcc).
+2. **Execution:** Run the compiled executable to start MyShell.
+3. **Command Entry:** Enter commands interactively, following the specified syntax for parallel, sequential execution, output redirection, and piping.
+4. **Signal Handling:** MyShell gracefully handles Ctrl+C and Ctrl+Z signals without interrupting ongoing processes.
 
-4. **Signal Handling**: Handles signals generated from the keyboard using 'Ctrl + C' and 'Ctrl + Z'. The shell continues to function normally, and the commands being executed respond to these signals. The shell only exits with the 'exit' command.
-
-5. **Executing Multiple Commands**: Supports executing multiple commands sequentially or in parallel. Commands separated by '&&' are executed in parallel, while commands separated by '##' are executed sequentially. The shell waits for all commands to terminate before accepting further inputs.
-
-6. **Output Redirection**: Capable of redirecting standard output (STDOUT) using the '>' symbol. For example, `ls > info.out` writes the output of the `ls` command to the 'info.out' file instead of displaying it on the screen.
-
-7. **Support for Command Pipelines (Optional)**: Provides support for command pipelines using the '|' token. Users can execute command pipelines such as `cat myshell.c | grep open | wc`. This feature enables redirecting the standard output of one command to the standard input of another command.
-
-## Usage
-
-To use the command shell, follow these steps:
-
-1. Compile the provided source code (`myshell.c`) using a C compiler on a Linux system.
-   
-2. Run the compiled executable to start the shell.
-
-3. Enter commands interactively at the prompt. Use 'exit' to terminate the shell.
-
-## Implementation Details
-
-The shell source code is modular and well-commented for easy understanding. It utilizes system calls such as `fork()`, `exec()`, `wait()`, and `chdir()` to execute commands and manage processes. Signal handling is implemented to ensure the shell responds appropriately to keyboard signals.
-
+### Conclusion
+MyShell offers a versatile and efficient environment for executing shell commands with additional functionalities for advanced users. With support for signal handling, parallel/sequential execution, output redirection, and piping, it provides a comprehensive solution for various command-line tasks.
